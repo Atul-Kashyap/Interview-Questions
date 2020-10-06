@@ -44,42 +44,52 @@
   
   ```cpp
   
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-void Swap(int *a, int *b){
+void swap(int *a, int *b){
 	int t = *a;
 	*a = *b;
 	*b = t;
 }
 
-int Partition(int arr[], int l, int r){
- int i = l - 1;
- int p = arr[r];
- for(int j = l; j < r; ++j){
- 	if(arr[j] < p){
- 		i++;
- 		Swap(&arr[i], &arr[j]);
- 	}
- }
- Swap(&arr[i+1], &arr[r]);
- return i+1;
+int partition(int arr[], int l, int r){
+	int i = l-1;
+	int pivot_val = arr[r];
+	for(int j = l; j < r; ++j){
+		if(arr[j] < pivot_val){
+			i++;
+			swap(arr[i], arr[j]);
+		}
+	}
+	swap(arr[i+1], arr[r]);
+	return i+1;	
 }
-
 void quicksort(int arr[], int low, int high){
-    if(low < high){
-	int pivot = Partition(arr, low, high);
-	Partition(arr, low, pivot-1);
-	Partition(arr, pivot+1, high);
-}
+	if(low < high){
+		int pivot = partition(arr, low, high);
+		quicksort( arr, low, pivot-1);
+		quicksort( arr, pivot+1, high);
+	}
 }
 
-void Print(int arr[], int n){
+void print(int arr[], int n){
 	for(int i = 0; i < n; ++i){
 		cout << arr[i] << " ";
 	}
 	cout << endl;
 }
+
+int main(){
+	int arr[] = {5, 6, 8, 1, 2, 4, 7, 9, 6};
+	int n = sizeof(arr) / sizeof(arr[0]);
+	quicksort(arr, 0, n-1);
+	print(arr, n);
+	return 0;
+}
+
+```
+
 
 int main(){
 	int arr[] = {5, 6, 2, 3, 1, 9, 7, 8};
