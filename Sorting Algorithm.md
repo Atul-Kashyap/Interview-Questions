@@ -91,14 +91,6 @@ int main(){
 ```
 
 
-int main(){
-	int arr[] = {5, 6, 2, 3, 1, 9, 7, 8};
-	int n = sizeof(arr)/sizeof(arr[0]);
-	quicksort(arr, 0, n-1);
-	Print(arr, n);
-    return 0;
-}
 
-```
 
 
