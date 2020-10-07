@@ -91,6 +91,82 @@ int main(){
 ```
 
 
+# 2. [Merge Sort](https://www.geeksforgeeks.org/merge-sort/)
+
+  * Merge Sort is a Divide and Conquer algorithm. 
+     
+  * It divides input array in two halves, calls itself for the two halves and then merges the two sorted halves.
+     
+  * The merge() function is used for merging two halves. 
+     
+  * The merge(arr, l, m, r) is key process that assumes that arr[l..m] and arr[m+1..r] are sorted and merges the two sorted sub-arrays into one.
+  
+  * Time Complexity : O(NLogN)
+  
+  * Auxiliary Space : O(N)
+  
+  * Algorithmic Paradigm: Divide and Conquer
+
+  * Sorting In Place: No in a typical implementation
+
+  * Stable: Yes
+  
+  ```cpp
+  
+  #include<bits/stdc++.h>
+using namespace std;
+
+void merge(int arr[], int l, int m, int r){
+	int n1 = m - l + 1;
+	int n2 = r - m;
+	int left[n1];
+	int right[n2];
+	for(int i = 0; i < n1; ++i)
+	left[i] = arr[l+i];
+	for(int i = 0; i < n2; ++i)
+	right[i] = arr[m+1+i];
+	
+	int i = 0, j = 0, k = l;
+	while(i < n1 || j < n2){
+		if(i < n1 && j < n2){
+		 arr[k++] = left[i] < right[j] ? left[i++] : right[j++];
+		}
+		else
+		arr[k++] = i < n1 ? left[i++] : right[j++];
+	}
+
+}
+
+void mergesort(int arr[], int low, int high){
+	if(low < high){
+		int mid = (low + high) / 2;
+		mergesort(arr, low, mid);
+		mergesort(arr, mid+1, high);
+		merge(arr, low, mid, high);
+	}
+	
+}
+
+void print(int arr[], int n){
+	for(int i = 0; i < n; ++i)
+	cout << arr[i] << " ";
+	cout << endl;
+}
+
+int main(){
+	int arr[] = {5, 6, 2, 8, 9, 3, 2, 1};
+	int n = sizeof(arr) / sizeof(arr[0]);
+	mergesort(arr, 0, n-1);
+	print(arr, n);
+	
+	return 0;
+}
+
+```
+
+
+     
+
 
 
 
